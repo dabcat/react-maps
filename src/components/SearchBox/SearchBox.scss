@@ -1,0 +1,16 @@
+.SearchBox {
+  display: flex;
+  height: 32px;
+  &__input {
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    width: 240px;
+    height: 32px;
+    padding: 0 12px;
+    border-radius: 3px;
+    font-size: 14px;
+    outline: none;
+    text-overflow: ellipses;
+    margin: 0 10px;
+  }
+}

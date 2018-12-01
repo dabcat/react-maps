@@ -1,0 +1,48 @@
+.Home {
+  display: flex;
+  flex-direction: column;
+
+  &__search {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  &__routes {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    &-item {
+      flex-direction: row;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    &-name {
+      min-width: 300px;
+
+      &--id {
+        margin-right: 10px;
+      }
+
+      &--origin {
+        margin-right: 10px;
+
+        &::after {
+          content: " - ";
+          display: inline-block;
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+}
+
+.btn.Home__btn {
+  &--remove {
+    background-color: red;
+  }
+}

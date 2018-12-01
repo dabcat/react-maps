@@ -1,0 +1,21 @@
+.btn {
+  display: inline-flex;
+  border-radius: 5px;
+  padding: 8px 12px;
+  line-height: 1;
+  font-size: 12px;
+  font-weight: 700;
+  background-color: #7ec0ee;
+  color: white;
+  border-color: inherit;
+  cursor: pointer;
+
+  &:hover {
+    border-color: black;
+  }
+
+  &:disabled,
+  &[disabled] {
+    background-color: #ccc;
+  }
+}

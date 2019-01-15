@@ -41,8 +41,15 @@
   }
 }
 
+.section__heading {
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 30px;
+  padding-bottom: 10px;
+}
+
 .btn.Home__btn {
   &--remove {
     background-color: red;
+    margin-left: 10px;
   }
 }

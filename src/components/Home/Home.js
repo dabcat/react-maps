@@ -1,7 +1,11 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux';
 import "./Home.scss";
 import SearchBox from "../SearchBox/SearchBox";
 import Button from "../Button/Button";
+
+import { actionAddRoute, actionRemoveRoute } from './actions';
+
 
 class Home extends Component {
   constructor(props) {
@@ -52,6 +56,7 @@ class Home extends Component {
   }
 
   handleAddRoute = () => {
+
     const newRoute = {
       origin: this.formatDirection(this.state.origin),
       destination: this.formatDirection(this.state.destination)
@@ -61,6 +66,7 @@ class Home extends Component {
       origin: {},
       destination: {}
     });
+    this.props.dispatch(actionAddRoute(newRoute));
   };
 
   handleRemoveRoute = indexToDelete => {
@@ -69,6 +75,7 @@ class Home extends Component {
       (route, index) => index !== indexToDelete
     );
     this.setState({ routes: updatedRoutes });
+    this.props.dispatch(actionRemoveRoute(indexToDelete));
   };
 
   handleFromDirection = value => {
@@ -99,6 +106,7 @@ class Home extends Component {
 
     return (
       <div className="Home">
+        <h1 className="section__heading">Enter route</h1>
         <div className="Home__search">
           <SearchBox
             directionOutput={this.handleFromDirection}
@@ -116,7 +124,8 @@ class Home extends Component {
             Submit
           </Button>
         </div>
-        <div className="Home__routes">
+        {routes.length > 0 && <div className="Home__routes">
+          <h2 className="section__heading">Recent routes</h2>
           {routes.map((route, index) => {
             return (
               <div key={index} className="Home__routes-item">
@@ -144,16 +153,18 @@ class Home extends Component {
                     classes={["Home__btn--remove"]}
                     onClick={() => this.handleRemoveRoute(index)}
                   >
-                    Remove
+                    X
                   </Button>
                 </div>
               </div>
             );
           })}
-        </div>
+        </div>}
       </div>
     );
   }
 }
 
-export default Home;
+export default connect((state) => ({
+  routes: state.routes
+}))(Home);

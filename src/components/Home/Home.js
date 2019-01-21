@@ -4,8 +4,7 @@ import "./Home.scss";
 import SearchBox from "../SearchBox/SearchBox";
 import Button from "../Button/Button";
 
-import { actionAddRoute, actionRemoveRoute } from './actions';
-
+import { actionAddRoute, actionRemoveRoute, actionGetRoute } from './actions';
 
 class Home extends Component {
   constructor(props) {
@@ -18,41 +17,7 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    this.syncStateWithLocalStorage();
-
-    window.addEventListener(
-      "beforeunload",
-      this.saveStateToLocalStorage.bind(this)
-    );
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener(
-      "beforeunload",
-      this.saveStateToLocalStorage.bind(this)
-    );
-
-    this.saveStateToLocalStorage();
-  }
-
-  syncStateWithLocalStorage() {
-    for (let key in this.state) {
-      if (localStorage.hasOwnProperty(key)) {
-        let value = localStorage.getItem(key);
-        try {
-          value = JSON.parse(value);
-          this.setState({ [key]: value });
-        } catch (e) {
-          this.setState({ [key]: value });
-        }
-      }
-    }
-  }
-
-  saveStateToLocalStorage() {
-    for (let key in this.state) {
-      localStorage.setItem(key, JSON.stringify(this.state[key]));
-    }
+    this.setState({ routes: [...this.state.routes, this.props.dispatch(actionGetRoute())] });
   }
 
   handleAddRoute = () => {
@@ -102,7 +67,7 @@ class Home extends Component {
   };
 
   render() {
-    const { routes } = this.state;
+    const { routes } = this.props;
 
     return (
       <div className="Home">

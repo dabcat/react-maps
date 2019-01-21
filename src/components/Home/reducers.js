@@ -1,11 +1,18 @@
-import { ROUTE_ADD, ROUTE_REMOVE } from './actions';
+import { ROUTE_ADD, ROUTE_REMOVE, ROUTE_GET } from './actions';
+import { saveStateToLocalStorage, syncStateWithLocalStorage } from '../../services/LocalStorage';
 
 export default function routes(state = [], action) {
     switch (action.type) {
         case ROUTE_ADD:
-            return state.concat([action.route]);
+            const routeAdd = state.concat([action.route]);
+            saveStateToLocalStorage({ routes: routeAdd })
+            return routeAdd;
         case ROUTE_REMOVE:
-            return state.filter((route, index) => index !== action.id);
+            const routeRemove = state.filter((route, index) => index !== action.id);
+            saveStateToLocalStorage({ routes: routeRemove });
+            return routeRemove;
+        case ROUTE_GET:
+            return syncStateWithLocalStorage('routes');
         default:
             return state;
     }

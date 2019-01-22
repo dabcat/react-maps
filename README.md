@@ -2,6 +2,10 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+# Google API
+
+Create `GoogleApiKey.js` in /src/constants/ folder and paste the following code `export const GoogleApiKey = 'your API key';` where you need to place your google API key.
+
 ## Available Scripts
 
 In the project directory, you can run:

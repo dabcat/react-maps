@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Button from "../Button/Button";
 import "./RouteDetails.scss";
 import { googleMapsSettings } from "../../constants/GoogleMapsSettings";
+import { ErrorHandler } from '../../services/ErrorHandler';
 
 const google = (window.google = window.google ? window.google : {});
 const { compose, withProps, lifecycle } = require("recompose");
@@ -33,7 +34,7 @@ const MapWithADirectionsRenderer = compose(
               directions: result
             });
           } else {
-            console.error(`error fetching directions ${result}`);
+            ErrorHandler(`Directions returned ${result.status}`);
           }
         }
       );

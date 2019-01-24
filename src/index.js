@@ -4,12 +4,19 @@ import "./index.scss";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
-import { Provider } from 'react-redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { Provider, } from 'react-redux';
 import { createStore } from 'redux';
 import reducer from './reducers';
 import middleware from './middleware'
 
-const store = createStore(reducer, middleware);
+const composerEnhancers = composeWithDevTools({
+    name: `Redux`,
+    realtime: true,
+    trace: true
+});
+
+const store = createStore(reducer, composerEnhancers(middleware));
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById("root"));
 

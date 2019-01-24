@@ -17,7 +17,7 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    this.setState({ routes: [...this.state.routes, this.props.dispatch(actionGetRoute())] });
+    this.setState({ routes: [this.props.dispatch(actionGetRoute())] });
   }
 
   handleAddRoute = () => {
@@ -130,6 +130,8 @@ class Home extends Component {
   }
 }
 
-export default connect((state) => ({
+const mapState = state => ({
   routes: state.routes
-}))(Home);
+});
+
+export default connect(mapState)(Home);

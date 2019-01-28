@@ -3,6 +3,7 @@ import Button from "../Button/Button";
 import "./RouteDetails.scss";
 import { googleMapsSettings } from "../../constants/GoogleMapsSettings";
 import { ErrorHandler } from '../../services/ErrorHandler';
+import AlertModal from '../Modal/Modal';
 
 const google = (window.google = window.google ? window.google : {});
 const { compose, withProps, lifecycle } = require("recompose");
@@ -72,19 +73,22 @@ class RouteDetails extends Component {
   render() {
     const { destination, origin } = this.props.location.state;
     return (
-      <div className="RouteDetails">
-        <Button
-          classes={["RouteDetails__btn"]}
-          isRouterLink
-          routerLink={{ pathname: "/" }}
-        >
-          Back
+      <>
+        <div className="RouteDetails">
+          <Button
+            classes={["RouteDetails__btn"]}
+            isRouterLink
+            routerLink={{ pathname: "/" }}
+          >
+            Back
         </Button>
-        <h1>
-          {origin.name} - {destination.name}
-        </h1>
-        <MapWithADirectionsRenderer {...this.props} />
-      </div>
+          <h1>
+            {origin.name} - {destination.name}
+          </h1>
+          <MapWithADirectionsRenderer {...this.props} />
+        </div>
+        <AlertModal />
+      </>
     );
   }
 }
